@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Yinka Adejare — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0f2d4a;
+    --blue: #1a5c8a;
+    --accent: #2596be;
+    --teal: #0d8a7a;
+    --light: #f0f7fb;
+    --cream: #fafaf8;
+    --gray: #6b7280;
+    --dark: #1a1a2e;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ───────────────────────────────────────────── */
+  .hero {
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(37,150,190,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -150px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(13,138,122,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: rgba(37,150,190,0.2);
+    border: 1px solid rgba(37,150,190,0.4);
+    color: #7dd3f0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 32px;
+    width: fit-content;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(52px, 8vw, 96px);
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -2px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.35s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: #7dd3f0;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 24px;
+    max-width: 520px;
+    line-height: 1.7;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.5s forwards;
+  }
+
+  .hero-contacts {
+    display: flex;
+    gap: 24px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.65s forwards;
+  }
+
+  .contact-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.8);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 400;
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .contact-pill:hover {
+    background: rgba(37,150,190,0.2);
+    border-color: rgba(37,150,190,0.5);
+    color: white;
+  }
+
+  .contact-pill span { font-size: 16px; }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+    color: rgba(255,255,255,0.3);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 1s forwards;
+  }
+
+  .scroll-hint::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* ── SECTIONS ───────────────────────────────────────── */
+  .section {
+    padding: 100px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 48px;
+  }
+
+  /* ── ROLES CARDS ────────────────────────────────────── */
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 80px;
+  }
+
+  .role-card {
+    background: white;
+    border: 1px solid #e5eef5;
+    border-radius: 16px;
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+
+  .role-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(15,45,74,0.1);
+  }
+
+  .role-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .role-card.medical::before { background: linear-gradient(90deg, var(--accent), #5dbde0); }
+  .role-card.admin::before   { background: linear-gradient(90deg, var(--navy), var(--blue)); }
+  .role-card.esl::before     { background: linear-gradient(90deg, var(--teal), #2cd9c5); }
+
+  .role-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+
+  .role-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .role-card p {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  /* ── SKILLS ─────────────────────────────────────────── */
+  .skills-section {
+    background: var(--navy);
+    padding: 100px 60px;
+  }
+
+  .skills-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .skills-section .section-label { color: #7dd3f0; }
+  .skills-section .section-title { color: white; }
+
+  .skills-groups {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .skill-group h4 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .skill-tag {
+    display: inline-block;
+    background: rgba(37,150,190,0.12);
+    border: 1px solid rgba(37,150,190,0.25);
+    color: rgba(255,255,255,0.8);
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    margin: 4px 4px 4px 0;
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    background: rgba(37,150,190,0.25);
+    color: white;
+  }
+
+  .skill-tag.teal {
+    background: rgba(13,138,122,0.15);
+    border-color: rgba(13,138,122,0.3);
+  }
+
+  .skill-tag.soft {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.12);
+  }
+
+  /* ── EXPERIENCE ─────────────────────────────────────── */
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    padding: 48px 0;
+    border-bottom: 1px solid #e8eef3;
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-meta {
+    padding-top: 4px;
+  }
+
+  .exp-date {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .exp-org {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  .exp-content h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+
+  .exp-content p {
+    font-size: 15px;
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .exp-bullets li {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.6;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '▪';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 10px;
+    top: 3px;
+  }
+
+  /* ── EDUCATION ──────────────────────────────────────── */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .edu-card {
+    background: white;
+    border: 1px solid #e5eef5;
+    border-radius: 16px;
+    padding: 36px;
+    transition: transform 0.2s;
+  }
+
+  .edu-card:hover { transform: translateY(-3px); }
+
+  .edu-card .degree {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .edu-card .school {
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .edu-card .year {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 16px;
+  }
+
+  .edu-card .note {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.7;
+    padding-top: 16px;
+    border-top: 1px solid #eef3f7;
+  }
+
+  /* ── TOOLS ──────────────────────────────────────────── */
+  .tools-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .tool-badge {
+    background: white;
+    border: 1px solid #dce8f0;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(15,45,74,0.04);
+  }
+
+  .tool-badge:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 16px rgba(37,150,190,0.12);
+    transform: translateY(-2px);
+  }
+
+  /* ── CTA FOOTER ─────────────────────────────────────── */
+  .cta {
+    background: linear-gradient(135deg, var(--navy) 0%, #0d3d6b 100%);
+    padding: 100px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px; height: 400px;
+    background: radial-gradient(ellipse, rgba(37,150,190,0.1) 0%, transparent 70%);
+  }
+
+  .cta h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    color: white;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .cta p {
+    color: rgba(255,255,255,0.5);
+    font-size: 17px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 16px 40px;
+    border-radius: 40px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    position: relative;
+    letter-spacing: 0.5px;
+  }
+
+  .cta-btn:hover {
+    background: #1a7fa8;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(37,150,190,0.35);
+  }
+
+  /* ── DIVIDER ────────────────────────────────────────── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #dce8f0, transparent);
+  }
+
+  /* ── ANIMATIONS ─────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ─────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .hero, .section, .skills-section, .cta { padding: 60px 24px; }
+    .roles-grid, .skills-groups, .edu-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 8px; }
+    .hero h1 { font-size: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Medical VA · Admin VA · ESL Tutor</div>
+  <h1>Yinka<br/><em>Adejare</em></h1>
+  <p class="hero-sub">Nursing graduate. Operations background. Remote-ready. I bring structure, accuracy, and real healthcare knowledge to virtual support roles.</p>
+  <div class="hero-contacts">
+    <div class="contact-pill"><span>📞</span> +639615806292</div>
+    <div class="contact-pill"><span>✉</span> olayinkaadejare3@gmail.com</div>
+    <div class="contact-pill"><span>📍</span> Philippines · Remote</div>
+    <a class="contact-pill" href="https://yinka-portfolio.netlify.app" target="_blank" style="text-decoration:none; background:rgba(37,150,190,0.15); border-color:rgba(37,150,190,0.4);"><span>🔗</span> yinkaadejare.github.io/portfolio</a>
+  </div>
+  <div class="scroll-hint">Scroll to explore</div>
+</section>
+
+<!-- WHAT I DO -->
+<div class="section reveal">
+  <p class="section-label">What I Do</p>
+  <h2 class="section-title">Three roles, one strong foundation.</h2>
+  <div class="roles-grid">
+    <div class="role-card medical">
+      <div class="role-icon">🏥</div>
+      <h3>Medical Virtual Assistant</h3>
+      <p>Patient scheduling, documentation, inbox management, and healthcare admin support — backed by a nursing degree and a genuine understanding of clinical environments.</p>
+    </div>
+    <div class="role-card admin">
+      <div class="role-icon">🗂️</div>
+      <h3>General Admin VA</h3>
+      <p>Operations coordination, task delegation, inventory tracking, calendar and email management — built from 3 years of real supervisory experience.</p>
+    </div>
+    <div class="role-card esl">
+      <div class="role-icon">🌐</div>
+      <h3>Online ESL Tutor</h3>
+      <p>120-hour TEFL/TESOL certified. Teaching beginner to intermediate English online with a structured, empathetic approach shaped by cross-cultural lived experience.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section class="skills-section">
+  <div class="skills-inner">
+    <p class="section-label">Skills</p>
+    <h2 class="section-title">What I actually know how to do.</h2>
+    <div class="skills-groups">
+      <div class="skill-group reveal">
+        <h4>Healthcare & Admin</h4>
+        <span class="skill-tag">Patient Scheduling</span>
+        <span class="skill-tag">Medical Documentation</span>
+        <span class="skill-tag">EHR/EMR Navigation</span>
+        <span class="skill-tag">Confidentiality & HIPAA</span>
+        <span class="skill-tag">Inbox Management</span>
+        <span class="skill-tag">Calendar Coordination</span>
+        <span class="skill-tag">Data Entry & Reporting</span>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Teaching & Communication</h4>
+        <span class="skill-tag teal">TEFL/TESOL Certified</span>
+        <span class="skill-tag teal">Lesson Planning</span>
+        <span class="skill-tag teal">Grammar & Vocabulary</span>
+        <span class="skill-tag teal">Pronunciation Coaching</span>
+        <span class="skill-tag teal">Cross-Cultural Teaching</span>
+        <span class="skill-tag teal">Asynchronous Learning</span>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Soft Skills</h4>
+        <span class="skill-tag soft">Calm Under Pressure</span>
+        <span class="skill-tag soft">Attention to Detail</span>
+        <span class="skill-tag soft">Staff Training</span>
+        <span class="skill-tag soft">Team Coordination</span>
+        <span class="skill-tag soft">Active Listening</span>
+        <span class="skill-tag soft">Cultural Awareness</span>
+        <span class="skill-tag soft">Reliability</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<div class="section reveal">
+  <p class="section-label">Experience</p>
+  <h2 class="section-title">Where I've done the work.</h2>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="exp-date">Mar 2016 – Dec 2019</div>
+      <div class="exp-org">Burger Bistro<br/>South Africa</div>
+    </div>
+    <div class="exp-content">
+      <h3>Customer Service Supervisor & Floor Trainer</h3>
+      <p>Managed daily operations across floor and kitchen teams in a high-volume environment. This role required the same skills that make a good VA: staying organized, communicating clearly, and keeping things moving when it gets busy.</p>
+      <ul class="exp-bullets">
+        <li>Trained and onboarded new staff from day one, adjusting approach based on each person's pace</li>
+        <li>Managed schedules and task delegation for a team of 10+</li>
+        <li>Tracked inventory and ran stock reconciliations consistently</li>
+        <li>Handled customer concerns directly and resolved them on the spot</li>
+        <li>Maintained detailed operational records and documentation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="exp-date">2016 – 2025</div>
+      <div class="exp-org">University of Olivarez College<br/>Philippines</div>
+    </div>
+    <div class="exp-content">
+      <h3>Nursing Practicum & Healthcare Training</h3>
+      <p>Clinical training that shaped how I document, communicate, and handle sensitive information — habits I carry into every remote role.</p>
+      <ul class="exp-bullets">
+        <li>Maintained thorough patient records with full confidentiality</li>
+        <li>Followed clinical protocols closely — accuracy was non-negotiable</li>
+        <li>Explained complex medical information clearly to patients and families</li>
+        <li>Worked effectively in stressful, fast-moving environments</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<div class="section reveal">
+  <p class="section-label">Education & Certification</p>
+  <h2 class="section-title">The foundation.</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="degree">Bachelor of Science in Nursing</div>
+      <div class="school">University of Olivarez College</div>
+      <div class="year">Philippines · Graduated May 2025</div>
+      <div class="note">Healthcare training in patient care, documentation, medical communication, and clinical procedure — directly applicable to medical VA and admin roles.</div>
+    </div>
+    <div class="edu-card">
+      <div class="degree">120-Hour TEFL/TESOL Certification</div>
+      <div class="school">Internationally Recognized</div>
+      <div class="year">Completed 2026</div>
+      <div class="note">Covers ESL methodology, lesson planning, classroom management, and teaching English to non-native speakers at beginner to intermediate levels.</div>
+    </div>
+    <div class="edu-card">
+      <div class="degree">High School Certificate</div>
+      <div class="school">S.A. College</div>
+      <div class="year">South Africa · 2009–2011</div>
+      <div class="note">English-medium education in a multicultural environment — the same setting many of my ESL students are working toward.</div>
+    </div>
+    <div class="edu-card" style="background: linear-gradient(135deg, #f0f7fb, #e8f4f9); border-color: #c5dff0;">
+      <div class="degree" style="font-size:18px; color: var(--accent);">Currently Building</div>
+      <div class="school" style="margin-top:12px;">Medical Terminology Course</div>
+      <div class="year">Coursera · In Progress</div>
+      <div class="note">Adding formal medical terminology training to complement the nursing degree for Medical VA applications.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div class="section reveal" style="padding-top: 0;">
+  <p class="section-label">Tools</p>
+  <h2 class="section-title">What I work with.</h2>
+  <div class="tools-row">
+    <div class="tool-badge">📄 Google Docs</div>
+    <div class="tool-badge">📊 Google Sheets</div>
+    <div class="tool-badge">📅 Google Calendar</div>
+    <div class="tool-badge">💌 Gmail</div>
+    <div class="tool-badge">🎨 Canva</div>
+    <div class="tool-badge">📝 Notion</div>
+    <div class="tool-badge">📹 Zoom</div>
+    <div class="tool-badge">🤝 Google Meet</div>
+    <div class="tool-badge">💼 Microsoft Teams</div>
+    <div class="tool-badge">🗃️ Google Drive</div>
+    <div class="tool-badge">📊 Google Slides</div>
+  </div>
+</div>
+
+
+<!-- SHARE BAR -->
+<div style="background:#f0f7fb; border-top:1px solid #dce8f0; border-bottom:1px solid #dce8f0; padding:28px 60px; text-align:center;">
+  <p style="font-size:12px; letter-spacing:3px; text-transform:uppercase; color:#2596be; font-weight:600; margin-bottom:16px;">Share this portfolio</p>
+  <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+    <a href="https://yinka-portfolio.netlify.app" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:white; border:1px solid #dce8f0; border-radius:30px; padding:10px 24px; font-size:14px; font-weight:500; color:#0f2d4a; text-decoration:none;">🔗 Copy Link</a>
+    <a href="mailto:?subject=Portfolio – Yinka Adejare&body=Hi, I'd like to share my portfolio with you: https://yinka-portfolio.netlify.app" style="display:inline-flex; align-items:center; gap:8px; background:white; border:1px solid #dce8f0; border-radius:30px; padding:10px 24px; font-size:14px; font-weight:500; color:#0f2d4a; text-decoration:none;">✉️ Share via Email</a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://yinka-portfolio.netlify.app" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:#0077b5; border:1px solid #0077b5; border-radius:30px; padding:10px 24px; font-size:14px; font-weight:500; color:white; text-decoration:none;">in Share on LinkedIn</a>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Let's work together.</h2>
+  <p>Available for remote roles. Ready to start.</p>
+  <a class="cta-btn" href="mailto:olayinkaadejare3@gmail.com">Get in touch →</a>
+</section>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
